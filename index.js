@@ -41,6 +41,11 @@ async function run() {
         res.send(result);
       });
 
+      app.get("/assignment", async (req, res) => {
+        const result = await assignmentCollection.find().toArray();
+        res.send(result);
+      });
+
 
 
      await client.db("admin").command({ ping: 1 });
