@@ -34,9 +34,9 @@ async function run() {
      
       const assignmentCollection=client.db("assignmentDB").collection("assignment");
       app.post("/assignment", async (req, res) => {
-        const product = req.body;
-        console.log(product);
-        const result = await assignmentCollection.insertOne(product);
+        const assignment = req.body;
+        console.log(assignment);
+        const result = await assignmentCollection.insertOne(assignment);
         
         res.send(result);
       });
