@@ -46,6 +46,36 @@ async function run() {
         res.send(result);
       });
 
+      app.put("/updatedassignment/:id", async (req, res) => {
+        const id = req.params.id;
+        const data = req.body;
+        console.log("id", id, data);
+        const filter = { _id: new ObjectId(id) };
+        const options = { upsert: true };
+        const updatedProduct = {
+          $set: {
+            title: data.title,
+             email: data.email,
+             marks:data.marks,
+             image:data.image,
+             description:data.description,
+             level:data.level,
+             date:data.date
+          },
+          
+        };
+        console.log(updatedassignment);
+        const result = await passignmentCollection.updateOne(
+          filter,
+          updatedProduct,
+          options
+        );
+        res.send(result);
+      });
+
+
+
+
 
 
      await client.db("admin").command({ ping: 1 });
