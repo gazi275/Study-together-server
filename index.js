@@ -33,6 +33,10 @@ async function run() {
     await client.connect();
      
       const assignmentCollection=client.db("assignmentDB").collection("assignment");
+      const submitCollection=client.db("assignmentDB").collection("submit");
+
+
+
       app.post("/assignment", async (req, res) => {
         const assignment = req.body;
         console.log(assignment);
@@ -41,8 +45,23 @@ async function run() {
         res.send(result);
       });
 
+      app.post("/submit", async (req, res) => {
+        const submit = req.body;
+        console.log(submit);
+        const result = await submitCollection.insertOne(submit);
+        
+        res.send(result);
+      });
+
+
+
       app.get("/assignment", async (req, res) => {
         const result = await assignmentCollection.find().toArray();
+        res.send(result);
+      });
+      app.get("/assignment/:id", async (req, res) => {
+        const id = req.params.id
+        const result = await assignmentCollection.findOne({_id: new ObjectId(id)});
         res.send(result);
       });
 
