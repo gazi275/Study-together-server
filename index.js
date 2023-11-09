@@ -65,11 +65,22 @@ async function run() {
           
         };
         console.log(updatedassignment);
-        const result = await passignmentCollection.updateOne(
+        const result = await assignmentCollection.updateOne(
           filter,
           updatedProduct,
           options
         );
+        res.send(result);
+      });
+
+      app.get("/details/:id", async (req, res) => {
+        const id = req.params.id;
+        console.log(id);
+        const query = {
+          _id: new ObjectId(id),
+        };
+        const result = await assignmentCollection.findOne(query);
+        console.log(result);
         res.send(result);
       });
 
