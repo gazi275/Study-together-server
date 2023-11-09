@@ -53,6 +53,11 @@ async function run() {
         res.send(result);
       });
 
+      app.get("/submit", async (req, res) => {
+        const result = await submitCollection.find().toArray();
+        res.send(result);
+      });
+
 
 
       app.get("/assignment", async (req, res) => {
